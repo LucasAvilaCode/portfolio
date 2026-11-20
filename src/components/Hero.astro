@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import avatar from '../assets/images/avatar.jpg';
 import { site } from '../data/site';
 
 const socials = [
@@ -43,8 +45,8 @@ const socials = [
       </div>
       <div class="hero-avatar-wrapper">
         <div class="hero-avatar-glow"></div>
-        <img
-          src="/images/avatar.jpg"
+        <Image
+          src={avatar}
           alt="Lucas Cristian Avila Herrera - Técnico en Programación Web"
           class="hero-avatar-img"
           width="300"
