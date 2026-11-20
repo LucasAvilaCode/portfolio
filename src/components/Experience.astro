@@ -1,0 +1,40 @@
+---
+import { jobs, education } from '../data/experience';
+
+const columns = [
+  { icon: 'fa-solid fa-laptop-code', title: 'Experiencia Laboral', items: jobs },
+  { icon: 'fa-solid fa-graduation-cap', title: 'Formación Académica', items: education },
+];
+---
+
+<section id="experiencia" class="section-container">
+  <div class="section-header">
+    <div class="section-badge"><i class="fa-solid fa-briefcase"></i>Trayectoria</div>
+    <h2 class="section-title">Experiencia Laboral & <span class="gradient-text">Formación</span></h2>
+    <p class="section-subtitle">
+      Mi recorrido profesional en desarrollo de software, liderazgo de equipos y formación universitaria.
+    </p>
+  </div>
+  <div class="timeline-grid">
+    {columns.map((col) => (
+      <div class="timeline-column">
+        <div class="timeline-column-title">
+          <i class={col.icon}></i>
+          <h3>{col.title}</h3>
+        </div>
+        {col.items.map((item) => (
+          <div class="glass-card timeline-card">
+            <div class="timeline-header">
+              <div>
+                <h4 class="timeline-role">{item.role}</h4>
+                <div class="timeline-org">{item.org}</div>
+              </div>
+              <span class="timeline-period">{item.period}</span>
+            </div>
+            <p class="timeline-desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>

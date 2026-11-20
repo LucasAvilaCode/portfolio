@@ -1,0 +1,116 @@
+---
+import { site } from '../data/site';
+
+const cards = [
+  { icon: 'fa-solid fa-envelope', title: 'Correo Electrónico', text: site.email, href: `mailto:${site.email}` },
+  { icon: 'fa-solid fa-phone', title: 'Teléfono / WhatsApp', text: site.phone, href: site.whatsapp, external: true },
+  { icon: 'fa-solid fa-location-dot', title: 'Ubicación', text: 'San Juan, Argentina' },
+  { icon: 'fa-brands fa-linkedin-in', title: 'LinkedIn', text: 'Lucas Avila', href: site.linkedin, external: true },
+  { icon: 'fa-brands fa-github', title: 'GitHub', text: site.githubUser, href: site.github, external: true },
+];
+---
+
+<section id="contacto" class="section-container">
+  <div class="section-header">
+    <div class="section-badge"><i class="fa-solid fa-paper-plane"></i>Contacto</div>
+    <h2 class="section-title">¿Tienes un proyecto en mente? <span class="gradient-text">¡Hablemos!</span></h2>
+    <p class="section-subtitle">
+      Estoy disponible para trabajos freelance, oportunidades laborales a tiempo completo o colaboraciones.
+    </p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      {cards.map((c) => (
+        <div class="glass-card contact-card">
+          <div class="contact-icon"><i class={c.icon}></i></div>
+          <div class="contact-details">
+            <h4>{c.title}</h4>
+            <p>
+              {c.href ? (
+                <a href={c.href} target={c.external ? '_blank' : undefined} rel={c.external ? 'noopener' : undefined}>{c.text}</a>
+              ) : (
+                c.text
+              )}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="glass-card contact-form">
+      <div id="form-success" class="form-success" hidden>
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>¡Mensaje enviado con éxito!</h3>
+        <p>Gracias por ponerte en contacto, <span id="success-name"></span>. Te responderé lo antes posible.</p>
+      </div>
+
+      <form id="contact-form" data-email={site.email} data-endpoint={import.meta.env.PUBLIC_FORM_ENDPOINT ?? ''}>
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Ej: Juan Pérez" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="ejemplo@correo.com" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Asunto</label>
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="Propuesta de proyecto / Consulta" />
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Cuéntame sobre tu proyecto o consulta..." required></textarea>
+        </div>
+        <p id="form-error" class="form-error" role="alert"></p>
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-paper-plane"></i>Enviar Mensaje
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const success = document.getElementById('form-success') as HTMLElement;
+  const successName = document.getElementById('success-name') as HTMLElement;
+  const errorEl = document.getElementById('form-error') as HTMLElement;
+
+  function showSuccess(name: string) {
+    successName.textContent = name;
+    form.hidden = true;
+    success.hidden = false;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.textContent = '';
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const endpoint = form.dataset.endpoint;
+
+    // Sin endpoint configurado: abre el cliente de correo como alternativa
+    if (!endpoint) {
+      const subject = encodeURIComponent(data.subject || `Contacto de ${data.name}`);
+      const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`);
+      window.location.href = `mailto:${form.dataset.email}?subject=${subject}&body=${body}`;
+      showSuccess(data.name);
+      return;
+    }
+
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    button.disabled = true;
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      showSuccess(data.name);
+    } catch {
+      errorEl.textContent = 'No se pudo enviar el mensaje. Probá de nuevo o escribime por correo.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

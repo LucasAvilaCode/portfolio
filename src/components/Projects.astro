@@ -1,0 +1,34 @@
+---
+import { projects } from '../data/projects';
+---
+
+<section id="proyectos" class="section-container">
+  <div class="section-header">
+    <div class="section-badge"><i class="fa-solid fa-rocket"></i>Proyectos</div>
+    <h2 class="section-title">Mis proyectos <span class="gradient-text">destacados</span></h2>
+    <p class="section-subtitle">
+      Una selección de proyectos recientes en los que he trabajado, abarcando desarrollo web, aplicaciones móviles y dashboards.
+    </p>
+  </div>
+  <div class="projects-grid">
+    {projects.map((p) => (
+      <div class="glass-card project-card">
+        <div class="project-img-wrapper">
+          <img src={p.image} alt={p.alt} class="project-img" loading="lazy" />
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">{p.title}</h3>
+          <p class="project-desc">{p.desc}</p>
+          <div class="project-tech">
+            {p.tech.map((t) => <span class="tech-badge">{t}</span>)}
+          </div>
+          <div class="project-links">
+            <a href={p.github} target="_blank" rel="noopener" class="project-link">
+              <i class="fa-brands fa-github"></i>{p.githubLabel}
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

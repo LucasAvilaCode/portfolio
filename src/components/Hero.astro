@@ -1,0 +1,62 @@
+---
+import { site } from '../data/site';
+
+const socials = [
+  { href: site.github, icon: 'fa-brands fa-github', label: `GitHub: ${site.githubUser}`, external: true },
+  { href: site.linkedin, icon: 'fa-brands fa-linkedin-in', label: 'LinkedIn: Lucas Avila', external: true },
+  { href: `mailto:${site.email}`, icon: 'fa-solid fa-envelope', label: `Email: ${site.email}`, external: false },
+  { href: site.whatsapp, icon: 'fa-brands fa-whatsapp', label: `WhatsApp: ${site.phone}`, external: true },
+];
+---
+
+<section id="inicio" class="hero-section">
+  <div class="section-container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-status">
+          <div class="pulse-dot"></div>
+          Disponible para oportunidades TI
+        </div>
+        <h1 class="hero-title">Hola, soy <span class="gradient-text">Lucas Avila</span>.</h1>
+        <p class="hero-description">
+          Técnico Universitario en Programación Web (UNSJ) especializado en desarrollo Backend (.NET Core, Java, C#) y ecosistemas Web & Mobile (Flutter, Supabase, Angular). Proactivo y listo para aportar soluciones técnicas eficientes.
+        </p>
+        <div class="hero-actions">
+          <a href="#proyectos" class="btn-primary">
+            Ver Proyectos <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#contacto" class="btn-secondary">Contactar</a>
+        </div>
+        <div class="social-links">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              class="social-icon"
+              aria-label={s.label}
+              target={s.external ? '_blank' : undefined}
+              rel={s.external ? 'noopener' : undefined}
+            >
+              <i class={s.icon}></i>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-glow"></div>
+        <img
+          src="/images/avatar.jpg"
+          alt="Lucas Cristian Avila Herrera - Técnico en Programación Web"
+          class="hero-avatar-img"
+          width="300"
+          height="300"
+        />
+        <div class="floating-tech-badge badge-1">
+          <i class="fa-solid fa-code" style="color: #3b82f6"></i>Flutter
+        </div>
+        <div class="floating-tech-badge badge-2">
+          <i class="fa-solid fa-database" style="color: #38bdf8"></i>SQL & Supabase
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

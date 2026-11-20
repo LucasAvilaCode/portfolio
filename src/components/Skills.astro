@@ -1,0 +1,34 @@
+---
+import { skillCategories } from '../data/skills';
+---
+
+<section id="habilidades" class="section-container">
+  <div class="section-header">
+    <div class="section-badge"><i class="fa-solid fa-code"></i>Habilidades</div>
+    <h2 class="section-title">Mi stack tecnológico & <span class="gradient-text">competencias</span></h2>
+    <p class="section-subtitle">
+      Herramientas y tecnologías que utilizo día a día para construir productos digitales de alta calidad.
+    </p>
+  </div>
+  <div class="skills-grid">
+    {skillCategories.map((cat) => (
+      <div class="glass-card skill-category-card">
+        <div class="category-header">
+          <div class="category-icon"><i class={cat.icon}></i></div>
+          <h3>{cat.title}</h3>
+        </div>
+        <div class="skill-list">
+          {cat.items.map((item) => (
+            <div class="skill-item">
+              <div class="skill-item-icon"><i class={item.icon}></i></div>
+              <span class="skill-item-name">{item.name}</span>
+            </div>
+          ))}
+        </div>
+        <div class="skill-tags">
+          {cat.tags.map((tag) => <div class="skill-tag">{tag}</div>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

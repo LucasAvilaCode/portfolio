@@ -1,0 +1,52 @@
+---
+const links = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#sobre-mi', label: 'Sobre mí' },
+  { href: '#experiencia', label: 'Experiencia & Educación' },
+  { href: '#habilidades', label: 'Habilidades' },
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#inicio" class="logo">
+      <i class="fa-solid fa-code"></i>
+      <span>Lucas</span>Avila
+    </a>
+    <nav>
+      <ul class="nav-links">
+        {links.map((l, i) => (
+          <li><a href={l.href} class:list={['nav-link', { active: i === 0 }]}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a href="#contacto" class="btn-primary">
+      <i class="fa-solid fa-paper-plane"></i>
+      Hablemos
+    </a>
+  </div>
+</header>
+
+<script>
+  // Resalta el link del menú según la sección visible
+  const links = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+  const sections = Array.from(links)
+    .map((l) => document.querySelector(l.getAttribute('href')!))
+    .filter((s): s is Element => s !== null);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        links.forEach((l) =>
+          l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`),
+        );
+      }
+    },
+    { rootMargin: '-40% 0px -55% 0px' },
+  );
+
+  sections.forEach((s) => observer.observe(s));
+</script>

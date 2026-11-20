@@ -1,0 +1,37 @@
+---
+const paragraphs = [
+  'Graduado como Técnico Universitario en Programación Web (UNSJ) con una sólida base académica en desarrollo Backend. Durante mi formación he desarrollado habilidades avanzadas en ecosistemas .NET y Java, así como en la gestión de bases de datos SQL.',
+  'Me considero una persona proactiva, con gran capacidad de aprendizaje y entusiasmo por iniciar mi trayectoria profesional en el sector TI, aportando soluciones técnicas eficientes, compromiso y resultados desde el primer día.',
+  'Además del desarrollo end-to-end (ASP.NET Core, Java, Flutter, Angular, Supabase), cuento con experiencia práctica en soporte técnico de hardware/software, administración de sistemas Windows/Linux y liderazgo de equipos.',
+];
+
+const stats = [
+  { value: 'UNSJ', label: 'Graduado en Prog. Web' },
+  { value: '.NET', label: 'Sólido Enfoque Backend' },
+  { value: 'SaaS', label: 'Flutter & Supabase App' },
+  { value: '100%', label: 'Compromiso & Resultados' },
+];
+---
+
+<section id="sobre-mi" class="section-container">
+  <div class="section-header">
+    <div class="section-badge"><i class="fa-solid fa-user"></i>Sobre mí</div>
+    <h2 class="section-title">Perfil <span class="gradient-text">Profesional</span></h2>
+    <p class="section-subtitle">
+      Técnico Universitario en Programación Web (UNSJ) con sólida base académica en Backend, arquitectura de software y gestión de bases de datos.
+    </p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      {paragraphs.map((text) => <p>{text}</p>)}
+    </div>
+    <div class="stats-grid">
+      {stats.map((s) => (
+        <div class="glass-card stat-card">
+          <div class="stat-number gradient-text">{s.value}</div>
+          <div class="stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
