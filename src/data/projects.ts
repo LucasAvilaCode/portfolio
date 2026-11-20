@@ -15,8 +15,8 @@ export const projects: Project[] = [
     alt: 'Chameleon - SaaS de Gestión de Gimnasios',
     desc: 'Desarrollo end-to-end de un SaaS escalable para la gestión de gimnasios (panel web administrativo + app móvil para socios). Arquitectura en Flutter acoplada a backend en Supabase (PostgreSQL) con Triggers, Stored Procedures y automatización de reservas. Despliegues mediante Firebase Hosting y Cloudflare.',
     tech: ['Flutter', 'Supabase', 'PostgreSQL', 'Triggers & SP', 'Firebase Hosting', 'Cloudflare'],
-    github: 'https://github.com/LucasAvilaCode',
-    githubLabel: 'GitHub: LucasAvilaCode',
+    github: 'https://chameleonfit.app',
+    githubLabel: 'Sitio Oficial',
   },
   {
     title: 'CineHub | Plataforma Web de Gestión',
